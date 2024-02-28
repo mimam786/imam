@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 import aya
 
-st.header('Chat with Document')
+# st.header('Chat with Document')
 
 #method to get values of environment varaibles from .env file 
 load_dotenv()
@@ -42,7 +42,7 @@ def rag(query):
     response = model.generate_content(prompt)
     return f"Source doc: {title}\n\n Response:\n{response.text}" 
 
-uploaded_files = st.file_uploader("Upload a file", accept_multiple_files=True)
+uploaded_files = st.file_uploader("Upload a file", type=["pdf"], accept_multiple_files=True)
 selected_language = st.selectbox('Choose your language of response',language_options)
 
 # st.text(uploaded_files)
