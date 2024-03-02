@@ -5,7 +5,6 @@ import streamlit as st
 
 # Loop through each file in the current directory
 def extract_text(file_name):
-    # st.text(file_name)
     if file_name.endswith('.pdf'):
         try:
             # Open the PDF file
@@ -20,7 +19,6 @@ def extract_text(file_name):
                     # Extract text from the page
                     text += pdf_reader.pages[page_num].extract_text()
                     text = text.replace('\n',' ')
-                # st.text(text)
                     
                 # Create a new DataFrame with the file's title and text
                 new_row = pd.DataFrame({'title': [file_name], 'text': [text]})

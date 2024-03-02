@@ -7,8 +7,6 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 import aya
 
-# st.header('Chat with Document')
-
 #method to get values of environment varaibles from .env file 
 load_dotenv('.env')
 
@@ -18,7 +16,7 @@ genai.configure(api_key=api_key)
 language_options = ('BENGALI', 'HINDI','IRISH','MALAY (STANDARD)','PERSIAN (WESTERN)','SHONA','SINHALA','SWEDISH','TAMIL','TELUGU','THAI','TURKISH','URDU','VIETNAMESE','ZULU')
 
 
-# # Initialize an empty DataFrame with columns 'Title' and 'Text'
+# Initialize an empty DataFrame with columns 'Title' and 'Text'
 dataF = pd.DataFrame(columns=['title', 'text'])
 
 def embed_text(text):
@@ -45,7 +43,6 @@ def rag(query):
 uploaded_files = st.file_uploader("Upload a file", type=["pdf"], accept_multiple_files=True)
 selected_language = st.selectbox('Choose your language of response',language_options)
 
-# st.text(uploaded_files)
 if uploaded_files:
     for file in uploaded_files:
         with open(file.name, 'wb') as f:
@@ -53,15 +50,12 @@ if uploaded_files:
         data_row = extract_text(file.name)
         dataF = pd.concat([dataF, data_row], ignore_index=True)
 
-    # st.write(dataF)
     dataF['embeddings'] = dataF['text'].apply(embed_text)    
     query = st.chat_input(placeholder ='Please type in your question')
     if query: 
         with st.chat_message("user"):
             st.write(query)
         response = rag(query)
-        # st.write('selected_language: ', selected_language)
-        # st.write('response: ', response)
 
         translated_response = aya.get_aya_response(selected_language, response)
         st.markdown(response)
