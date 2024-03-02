@@ -10,7 +10,7 @@ import aya
 # st.header('Chat with Document')
 
 #method to get values of environment varaibles from .env file 
-load_dotenv()
+load_dotenv('.env')
 
 #Configuring Gemini API with the API key
 api_key = os.getenv("GEMINI_API_KEY")

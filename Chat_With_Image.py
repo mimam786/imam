@@ -5,7 +5,7 @@ import google.generativeai as genai
 from PIL import Image
 import aya
 
-load_dotenv()
+load_dotenv('.env')
 
 if 'uploaded_file' not in st.session_state:
     st.session_state.uploaded_file = None
